@@ -1,11 +1,10 @@
 const express = require("express");
+const {getItems, getItem} = require("../controllers/tracks");
 
-router = express.Router();
+const router = express.Router();
 //TODO: http://loclahost/tracks GET, POST, PUT, DELETE
 
-router.get("/tracks", (req, res) => {
-  const data = ["Hola", "mundo"];
-  res.send(data)
-})
+router.get("/", getItems);
+router.get("/:id", getItem);
 
 module.exports = router;
