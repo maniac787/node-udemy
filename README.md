@@ -7,5 +7,5 @@ npm init --y
 # Dependencias
 
 ```shell
-npm install express cors dotenv mullter mongoose  --save
+npm install express cors dotenv mullter mongoose express-validator --save
 ```
