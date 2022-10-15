@@ -6,7 +6,10 @@ const app = express();
 const dbConnect = require("./config/mongo");
 
 app.use(cors());
-app.use(express.json())
+app.use(express.json());
+//Expone los recursos publicos
+app.use(express.static("storage"));
+
 const port = process.env.PORT || 3001;
 
 /**
