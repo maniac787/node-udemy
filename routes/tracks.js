@@ -8,6 +8,6 @@ const router = express.Router();
 
 router.get("/", getItems);
 router.get("/:id", getItem);
-router.post("/", validatorCreateItem, customHeader, createItem);
+router.post("/", validatorCreateItem, createItem);
 
 module.exports = router;
