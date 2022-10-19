@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const mongooseDelete = require("mongoose-delete");
+
 const TrackScheme = new mongoose.Schema({
     name: {type: String},
     album: {type: String},
@@ -28,5 +30,7 @@ const TrackScheme = new mongoose.Schema({
     versionKey: false
   }
 );
+
+TrackScheme.plugin(mongooseDelete, {overrideMethods: 'all'});
 //coleccion en mongo, definicion modelo
-module.exports = mongoose.model("tracks", TrackScheme)
+module.exports = mongoose.model("tracks", TrackScheme);

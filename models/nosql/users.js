@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const mongooseDelete = require("mongoose-delete");
 const UserScheme = new mongoose.Schema({
     name: {type: String},
     age: {type: Number},
@@ -12,4 +13,5 @@ const UserScheme = new mongoose.Schema({
   }
 );
 //coleccion en mongo, definicion modelo
+UserScheme.plugin(mongooseDelete, {overrideMethods: 'all'});
 module.exports = mongoose.model("users", UserScheme)
