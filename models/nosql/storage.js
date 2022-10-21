@@ -12,4 +12,4 @@ const StorageScheme = new mongoose.Schema({
 );
 //coleccion en mongo, definicion modelo
 StorageScheme.plugin(mongooseDelete, {overrideMethods: 'all'});
-module.exports = mongoose.model("storages", StorageScheme)
+module.exports = mongoose.model("storages", StorageScheme);
