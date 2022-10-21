@@ -7,8 +7,12 @@ const PUBLIC_URL = process.env.PUBLIC_URL;
 const MEDIA_PATH = `${__dirname}/../storage`;
 
 const getItems = async (req, res) => {
-  const data = await storageModel.find({});
-  res.send(data)
+  try {
+    const data = await storageModel.find({});
+    res.send(data)
+  } catch (error) {
+    handleHttpError(res, "ERROR_GET_ITEMS")
+  }
 };
 const getItem = async (req, res) => {
   try {
@@ -21,7 +25,7 @@ const getItem = async (req, res) => {
 };
 
 const createItem = async (req, res) => {
-  const {body, file} = req;
+  const {file} = req;
   const fileDta = {
     fileName: file.filename,
     url: `${PUBLIC_URL}/${file.filename}`
@@ -29,19 +33,21 @@ const createItem = async (req, res) => {
   const data = await storageModel.create(fileDta);
   res.send(data);
 };
-const updateItem = (req, res) => {
-};
+
 const deleteItem = async (req, res) => {
   try {
     const {id} = matchedData(req);
     const dataFile = await storageModel.findById(id);
+
+    await storageModel.deleteOne({"_id": id});
+
     const {fileName} = dataFile;
     const filePath = `${MEDIA_PATH}/${fileName}`;
     fs.unlinkSync(filePath);
 
     const data = {
       filePath,
-      deleted:1
+      deleted: 1
     }
     res.send(data);
   } catch (error) {
@@ -49,4 +55,4 @@ const deleteItem = async (req, res) => {
   }
 };
 
-module.exports = {getItem, createItem, deleteItem, getItems, updateItem}
+module.exports = {getItem, createItem, deleteItem, getItems}
