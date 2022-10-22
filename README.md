@@ -9,3 +9,8 @@ npm init --y
 ```shell
 npm install express cors dotenv mullter mongoose express-validator --save
 ```
+
+Asegurando las rutas
+```shell
+npm install jsonwebtoken bcrypt --save
+```
