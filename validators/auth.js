@@ -3,9 +3,9 @@ const validateResults = require("../utils/handleValidator");
 
 const validatorRegister = [
   check("name").exists().notEmpty().isLength({min: 3, max: 99}),
+  check("age").exists().notEmpty().isNumeric(),
   check("password").exists().notEmpty().isLength({min: 3, max: 15}),
   check("email").exists().notEmpty().isEmail(),
-  check("age").exists().notEmpty().isNumeric(),
   (req, res, next) => {
     return validateResults(req, res, next)
   }
