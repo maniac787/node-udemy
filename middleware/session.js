@@ -1,5 +1,6 @@
 const {handleHttpError} = require("../utils/handleError");
 const {verifyToken} = require("../utils/handleJwt");
+const {userModel} = require("../models");
 
 const authMiddleware = async (req, res, next) => {
   try {
@@ -15,6 +16,9 @@ const authMiddleware = async (req, res, next) => {
       handleHttpError(res, "ERROR_ID_TOKEN", 401);
       return
     }
+
+    const user = await userModel.findById(dataToken._id);
+    req.user = user;
 
     next();
   } catch (e) {
