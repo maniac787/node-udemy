@@ -9,22 +9,22 @@ const {IncomingWebhook} = require("@slack/webhook");
 
 app.use(cors());
 app.use(express.json());
-const webhook = new IncomingWebhook(process.env.SLACK_WEBHOOK);
+const webHook = new IncomingWebhook(process.env.SLACK_WEBHOOK);
 //Expone los recursos publicos
 app.use(express.static("storage"));
 
 const loggerStream = {
   write: message => {
-    webhook.send({
-      text: message
-    })
-    logger.info(message);
+    // do anything - emit to websocket? send message somewhere? log to cloud?
+    console.log("CAPTURANDO EL LOG", message)
+    webHook.send({text: message})
   },
 };
 
 
 morganBody(app, {
   noColors: true,
+  stream: loggerStream
 
 });
 const port = process.env.PORT || 3001;
