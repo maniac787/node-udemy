@@ -24,3 +24,11 @@ Integrar el log a slack
 ```shell
 npm i @slack/webhook -S
 ```
+
+## SQL ORM Sequelize [Mysql, Postgresql]
+
+```shell
+npm i sequelize mysql2 -S
+```
+
+Ojo Error: Please install mysql2 package manually

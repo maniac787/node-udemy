@@ -2,10 +2,12 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
-const dbConnect = require("./config/mongo");
+const dbConnectNoSql = require("./config/mongo");
+const {dbConnectMysql} = require("./config/mysql");
 
 const morganBody = require("morgan-body");
 const loggerStream = require("./utils/handleLogger");
+const ENGINE_DB = process.env.ENGINE_DB;
 
 app.use(cors());
 app.use(express.json());
@@ -32,4 +34,4 @@ app.listen(port, () => {
   console.log(`http:localhost:${port}`)
 });
 
-dbConnect();
+(ENGINE_DB === 'nosql') ? dbConnectNoSql() : dbConnectMysql();
