@@ -14,3 +14,13 @@ Asegurando las rutas
 ```shell
 npm install jsonwebtoken bcrypt --save
 ```
+
+Monitoreando en timepo real, para juntarlo con slack
+```shell
+npm i morgan-body -S
+```
+
+Integrar el log a slack
+```shell
+npm i @slack/webhook -S
+```
