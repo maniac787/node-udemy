@@ -5,28 +5,21 @@ const app = express();
 const dbConnect = require("./config/mongo");
 
 const morganBody = require("morgan-body");
-const {IncomingWebhook} = require("@slack/webhook");
+const loggerStream = require("./utils/handleLogger");
 
 app.use(cors());
 app.use(express.json());
-const webHook = new IncomingWebhook(process.env.SLACK_WEBHOOK);
 //Expone los recursos publicos
 app.use(express.static("storage"));
 
-const loggerStream = {
-  write: message => {
-    // do anything - emit to websocket? send message somewhere? log to cloud?
-    console.log("CAPTURANDO EL LOG", message)
-    webHook.send({text: message})
-  },
-};
-
-
 morganBody(app, {
   noColors: true,
-  stream: loggerStream
-
+  stream: loggerStream,
+  skip: function (req, res) {
+    return res.statusCode < 400
+  }
 });
+
 const port = process.env.PORT || 3001;
 
 /**
