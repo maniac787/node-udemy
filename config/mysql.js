@@ -1,4 +1,3 @@
-const sequelize = require("sequelize");
 const {Sequelize} = require("sequelize");
 
 const host = process.env.MYSQL_HOST;

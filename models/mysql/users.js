@@ -7,7 +7,12 @@ const User = sequelizeInstance.define(
     age: {type: DataTypes.NUMBER},
     email: {type: DataTypes.STRING, unique: true},
     password: {type: DataTypes.STRING},
-    role: {type: DataTypes.ENUM(["user", "admin"]), default: "user"},
+    role: {
+      type: DataTypes.ENUM({
+        values: ['user', 'admin']
+      })
+    },
+
   },
   {
     timestamps: true,

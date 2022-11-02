@@ -40,7 +40,7 @@ const loginController = async (req, res) => {
   try {
     //Cura la data solo con lo necesario en el modelo
     req = matchedData(req);
-    const user = await userModel.findOne({email: req.email}).select('password name role email');
+    const user = await userModel.findOne({email: req.email})//.select('password name role email');
 
     if (!user) {
       handleHttpError(res, "USER_NOT_EXIST", 404);
