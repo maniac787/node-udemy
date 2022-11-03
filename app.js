@@ -7,6 +7,9 @@ const {dbConnectMysql} = require("./config/mysql");
 
 const morganBody = require("morgan-body");
 const loggerStream = require("./utils/handleLogger");
+const swaggerUI = require("swagger-ui-express");
+const openApiConfiguration = require("./docs/swagger");
+
 const ENGINE_DB = process.env.ENGINE_DB;
 
 app.use(cors());
@@ -23,6 +26,11 @@ morganBody(app, {
 });
 
 const port = process.env.PORT || 3001;
+
+/**
+ *
+ */
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(openApiConfiguration))
 
 /**
  * Aqui invocar a las rutas
