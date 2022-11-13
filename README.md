@@ -45,5 +45,5 @@ npm i swagger-ui-express swagger-jsdoc -S
 ## Pruebas unitarias y pruebas de integraci&oacute;n
 ***
 ```shell
-npm i jest supertest -D
+npm i jest supertest cross-env -D
 ```
