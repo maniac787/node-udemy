@@ -41,3 +41,9 @@ Ojo Error: Please install mysql2 package manually
 ```shell
 npm i swagger-ui-express swagger-jsdoc -S
 ```
+
+## Pruebas unitarias y pruebas de integraci&oacute;n
+***
+```shell
+npm i jest supertest -D
+```
