@@ -1,6 +1,7 @@
 const request = require("supertest");
 const app = require("../app")
 const {userModel} = require("../models");
+const mongoose = require("mongoose");
 
 const testAuthLogin = {
   "email": "test6@qwe.com",
@@ -16,6 +17,10 @@ const testAuthRegister = {
 
 beforeAll(async () => {
   await userModel.deleteMany();
+});
+
+afterAll(() => {
+  mongoose.connection.close();
 });
 
 describe("[AUTH] esta es la prueba de /api/auth", () => {
