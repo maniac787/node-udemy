@@ -14,8 +14,8 @@ const router = express.Router();
  * @openapi
  * /tracks:
  *    get:
- *        tag:
- *            - auth
+ *        tags:
+ *            - tracks
  *        summary: "List all tracks"
  *        description: "This path is to register new user"
  *        requestBody:

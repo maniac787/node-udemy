@@ -10,7 +10,7 @@ const {registerController, loginController} = require("../controllers/auth");
  * @openapi
  * /auth/register:
  *    post:
- *        tag:
+ *        tags:
  *            - auth
  *        summary: "Register new user"
  *        description: "This path is to register new user"
@@ -33,7 +33,7 @@ router.post("/register", validatorRegister, registerController);
  * @openapi
  * /auth/login:
  *    post:
- *        tag:
+ *        tags:
  *            - auth
  *        summary: "Register new user"
  *        description: "This path is to log in user"
