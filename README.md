@@ -1,5 +1,37 @@
 # Iniciacion proyecto
 
+## Mongo
+
+```shell
+show databases;
+use admin;
+
+db.createUser(
+  {
+    user: "lector",
+    pwd: "123456",
+    roles: [
+       { role: "read", db: "blog" }
+    ]
+  }
+);
+
+db.createUser(
+  {
+    user: "escritor",
+    pwd: "123456",
+    roles: [
+       { role: "readWrite", db: "blog" }
+    ]
+  }
+);
+  
+mongo -u lector -p 123456;
+mongo -u escritor -p 123456 --authenticationDatabase blog;
+use blog;
+db.posts.find();
+```
+
 ```shell
 npm init --y
 ```
@@ -43,7 +75,9 @@ npm i swagger-ui-express swagger-jsdoc -S
 ```
 
 ## Pruebas unitarias y pruebas de integraci&oacute;n
+
 ***
+
 ```shell
 npm i jest supertest cross-env -D
 ```

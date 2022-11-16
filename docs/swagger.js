@@ -95,7 +95,18 @@ const swaggerDefinition = {
             type: "string"
           }
         }
-      }
+      },
+      storage: {
+        type: "object",
+        properties: {
+          url: {
+            type: "string",
+          },
+          filename: {
+            type: "string",
+          },
+        },
+      },
     }
   }
 };
