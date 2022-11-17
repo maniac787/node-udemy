@@ -4,14 +4,14 @@ const {userModel} = require("../models");
 const mongoose = require("mongoose");
 
 const testAuthLogin = {
-  "email": "test6@qwe.com",
+  "email": "test@qwe.com",
   "password": "qwe123"
 };
 
 const testAuthRegister = {
   "name": "rch",
   "age": 38,
-  "email": "rch2@qwe.com",
+  "email": "test@qwe.com",
   "password": "qwe123"
 };
 
@@ -41,5 +41,22 @@ describe("[AUTH] esta es la prueba de /api/auth", () => {
     expect(response.body).toHaveProperty("user");
     expect(response.body).toHaveProperty("user.name");
     expect(response.body).toHaveProperty("token");
+  });
+
+  test("esto deberia de retornar password no valido 401", async () => {
+    const newTestAuthLogin = {...testAuthLogin, password:"22222222"}
+    const response = await request(app)
+      .post("/api/auth/login")
+      .send(newTestAuthLogin);
+
+    expect(response.statusCode).toEqual(401);
+  });
+
+  test("esto deberia de retornar 200 login exitoso", async () => {
+    const response = await request(app)
+      .post("/api/auth/login")
+      .send(testAuthRegister);
+
+    expect(response.statusCode).toEqual(200);
   });
 })
