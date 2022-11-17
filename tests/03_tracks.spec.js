@@ -1,7 +1,7 @@
 const request = require("supertest");
 const app = require("../app");
-const { tokenSign } = require("../utils/handleJwt");
-const { usersModel, storageModel, tracksModel } = require("../models");
+const {tokenSign} = require("../utils/handleJwt");
+const {usersModel, storageModel, tracksModel} = require("../models");
 const {
   testAuthRegisterAdmin,
   testDataTrack,
@@ -22,13 +22,14 @@ beforeAll(async () => {
 test("deberia registra un item", async () => {
   const dataTracksNew = {
     ...testDataTrack,
-    mediaId: STORAGE_ID };
+    mediaId: STORAGE_ID
+  };
 
   const res = await request(app)
     .post("/api/tracks")
     .set("Authorization", `Bearer ${JWT_TOKEN}`)
     .send(dataTracksNew);
-  const { body } = res;
+  const {body} = res;
   expect(res.statusCode).toEqual(201);
   expect(body).toHaveProperty("data");
   expect(body).toHaveProperty("data.name");
@@ -40,31 +41,31 @@ test("should create a return all", async () => {
   const res = await request(app)
     .get("/api/tracks")
     .set("Authorization", `Bearer ${JWT_TOKEN}`);
-  const { body } = res;
+  const {body} = res;
   expect(res.statusCode).toEqual(200);
-  const { data } = body;
+  const {data} = body;
   //   idFile = data.docs[0]._id;
   expect(body).toHaveProperty("data");
 });
 
 test("debe retornar todo el detalle del item", async () => {
-  const { _id } = await tracksModel.findOne({});
+  const {_id} = await tracksModel.findOne({});
   id = _id.toString();
   const res = await request(app)
     .get(`/api/tracks/${id}`)
     .set("Authorization", `Bearer ${JWT_TOKEN}`);
-  const { body } = res;
+  const {body} = res;
   expect(res.statusCode).toEqual(200);
   expect(body).toHaveProperty("data");
 });
 
 test("debe eliminar el item", async () => {
-  const { _id } = await tracksModel.findOne({});
+  const {_id} = await tracksModel.findOne({});
   id = _id.toString();
   const res = await request(app)
     .delete(`/api/tracks/${id}`)
     .set("Authorization", `Bearer ${JWT_TOKEN}`);
-  const { body } = res;
+  const {body} = res;
   expect(res.statusCode).toEqual(200);
   expect(body).toHaveProperty("data");
   expect(body).toHaveProperty("data.deleted", 1);

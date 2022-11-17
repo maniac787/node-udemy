@@ -44,7 +44,7 @@ describe("[AUTH] esta es la prueba de /api/auth", () => {
   });
 
   test("esto deberia de retornar password no valido 401", async () => {
-    const newTestAuthLogin = {...testAuthLogin, password:"22222222"}
+    const newTestAuthLogin = {...testAuthLogin, password: "22222222"}
     const response = await request(app)
       .post("/api/auth/login")
       .send(newTestAuthLogin);

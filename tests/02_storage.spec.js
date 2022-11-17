@@ -1,9 +1,9 @@
 const request = require("supertest");
 const app = require("../app");
-const { tokenSign } = require("../utils/handleJwt");
-const { testAuthRegister } = require("./helper/helperData")
-const { usersModel } = require("../models");
-const { storageModel } = require("../models");
+const {tokenSign} = require("../utils/handleJwt");
+const {testAuthRegister} = require("./helper/helperData")
+const {usersModel} = require("../models");
+const {storageModel} = require("../models");
 let JWT_TOKEN = "";
 const filePath = `${__dirname}/dump/track.mp3`;
 
@@ -19,7 +19,7 @@ test("should uplaod file", async () => {
     .post("/api/storage")
     .set("Authorization", `Bearer ${JWT_TOKEN}`)
     .attach("myfile", filePath);
-  const { body } = res;
+  const {body} = res;
   expect(res.statusCode).toEqual(201);
   expect(body).toHaveProperty("data");
   expect(body).toHaveProperty("data.url");
@@ -29,32 +29,32 @@ test("should create a return all", async () => {
   const res = await request(app)
     .get("/api/storage")
     .set("Authorization", `Bearer ${JWT_TOKEN}`);
-  const { body } = res;
+  const {body} = res;
   expect(res.statusCode).toEqual(200);
-  const { data } = body;
+  const {data} = body;
   expect(body).toHaveProperty("data");
 });
 
 test("debe retornar todo el detalle del item", async () => {
-  const { _id } = await storageModel.findOne();
+  const {_id} = await storageModel.findOne();
   id = _id.toString();
 
   const res = await request(app)
     .get(`/api/storage/${id}`)
     .set("Authorization", `Bearer ${JWT_TOKEN}`);
-  const { body } = res;
+  const {body} = res;
   expect(res.statusCode).toEqual(200);
   expect(body).toHaveProperty("data");
 });
 
 test("debe eliminar el item", async () => {
-  const { _id } = await storageModel.findOne();
+  const {_id} = await storageModel.findOne();
   id = _id.toString();
 
   const res = await request(app)
     .delete(`/api/storage/${id}`)
     .set("Authorization", `Bearer ${JWT_TOKEN}`);
-  const { body } = res;
+  const {body} = res;
   expect(res.statusCode).toEqual(200);
   expect(body).toHaveProperty("data");
   expect(body).toHaveProperty("data.deleted", 1);
