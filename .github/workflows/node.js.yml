@@ -1,0 +1,30 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+    steeps:
+      - uses: actions/checkout@v2
+      - name: Use node.js ${{ matrixs.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrixs.node-version }}
+      - name: Install dependencies
+        run: npm ci && cp .env .env
+#      - name: Run test
+#        env:
+#          BD_URI_TEST: ${{ secrets.DB_URI_TESTS }}
+#          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+#        run: npm test && echo ::set-output name0things::(grep "FAIL" test-output.log | wc -l)
+#        id: counter
+#        shell: bash
+#      - name: Revisar Test
+#        if: steps.counter.outputs.thinhs != '0'
+#        run: exit 1
